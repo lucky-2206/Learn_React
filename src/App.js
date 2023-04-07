@@ -1,27 +1,42 @@
 import { element } from 'prop-types';
 import './App.css';
 import Header from './Components/Header';
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 
 function App() {
-  const[num,setnum]=useState(1);
-  function inc(ne)
-  {
-    setnum(num+ne)
-  }
-  function dec(ne)
-  {
-    setnum(num-ne)
-  }
+  const[num,setNum]=useState(15);
+  const[data,setData]= useState([]);
+
+  useEffect(()=>{
+    async function getData(){
+      console.log(num)
+      const get = await fetch(`https://hub.dummyapis.com/employee?noofRecords=$
+      {num}&idStarts=1001`);
+      
+      const res = await get.json();
+      setData(res);
+      console.log(res)
+    }
+    getData();
+  },[num])
+ 
   return (
     <div className="App">
       <Header />
       <div>
-      <p>Demonstration of UseState where in clicking increment button number will be increased by 3 and on decreasing it gets decreased by 2</p>
+      <p>UseEffect is called when the page is render for the first time or the page is rerender or any of the dependencies is changed </p>
         <h1>{num}</h1>
         <div className='buttons'>
-          <button className='btn' onClick={()=>inc(3)}>Increment</button>
-          <button className='btn' onClick={()=>dec(2)}>Decrement</button>
+          <button className='btn' onClick={()=>setNum(num+1)}>Increment</button>
+          {
+            data.map((element,index)=>{
+              return(
+                <div key={index}>
+                  <h4>{element.firstName}</h4>
+                </div>
+              )
+            })
+          }
         </div>
       </div>
     </div>

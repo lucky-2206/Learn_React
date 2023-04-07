@@ -3,7 +3,7 @@ import React from 'react'
 const Header = () => {
   return (
     <div className='Header'>
-   <h1>UseState Intro</h1>
+   <h1>UseEffect Intro</h1>
    </div>
   )
 }
