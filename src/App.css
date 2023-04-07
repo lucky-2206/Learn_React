@@ -60,6 +60,10 @@ h1
   margin: 10px;
   border: 2px solid black;
 } 
+.dataStyle{
+  display: flex;
+  justify-content: space-between;
+}
 
 
   

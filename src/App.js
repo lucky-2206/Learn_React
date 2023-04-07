@@ -4,14 +4,13 @@ import Header from './Components/Header';
 import React, { useState,useEffect } from 'react'
 
 function App() {
-  const[num,setNum]=useState(15);
+  const[num,setNum]=useState(5);
   const[data,setData]= useState([]);
 
   useEffect(()=>{
     async function getData(){
       console.log(num)
-      const get = await fetch(`https://hub.dummyapis.com/employee?noofRecords=$
-      {num}&idStarts=1001`);
+      const get = await fetch(`https://hub.dummyapis.com/employee?noofRecords=${num}&idStarts=1001`);
       
       const res = await get.json();
       setData(res);
@@ -31,8 +30,10 @@ function App() {
           {
             data.map((element,index)=>{
               return(
-                <div key={index}>
+                <div key={index} className='dataStyle'>
                   <h4>{element.firstName}</h4>
+                  <h4>{element.lastName}</h4>
+                  <h4>{element.email}</h4>
                 </div>
               )
             })
